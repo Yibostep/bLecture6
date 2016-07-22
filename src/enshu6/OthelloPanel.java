@@ -26,12 +26,9 @@ class OthelloPanel extends JPanel {
         public void mousePressed(MouseEvent e) { 
         Point mp = e.getPoint();
         Rectangle r = getBounds();
-        System.out.println("mp=" + mp);
-        System.out.println("r=" + r);
         if (r.width != 0 && r.height != 0) { 
             cx = (double) mp.x / (double) r.width; 
             cy = (double) mp.y / (double) r.height;
-            System.out.printf("(cx,cy)=(%.2f,%.2f)", cx, cy);
                     repaint(); 
             }
         }
@@ -41,7 +38,6 @@ class OthelloPanel extends JPanel {
     
     public void paint(Graphics g){
         
-        System.out.println("Lets Paint!");
         Rectangle r = this.getBounds();
         g.setColor(Color.green);
         g.fillRect(r.x, r.y, r.width, r.height);
@@ -52,26 +48,19 @@ class OthelloPanel extends JPanel {
         for(int i = 0; i <= 10; i++)
                 g.drawLine(25+50*i, 25, 25+50*i, 525);
         
-        g.setColor(Color.black);
         int x = (int) (r.width * cx);
         int y = (int) (r.height * cy);
-        //System.out.println("-------x="+(x-25)+" y="+(y-25));
         double a = Math.floor(((x-25)/50));
         double b = Math.floor(((y-25)/50));
-        //System.out.println("-------a="+a+" b="+b);
-        
-        g.fillOval( (int)((a*50)+25), (int)((b*50)+25), 50, 50);
-        
         array_a.add((int)((a*50)+25));
         array_b.add((int)((b*50)+25));
         
-        for (int i = 0; i < array_a.size(); i++) {
-            System.out.println(array_a.get(i));
-            System.out.println(array_b.get(i));
+        if(cx != 0)
+        for (int i = 1; i < array_a.size(); i++) {
+                if(i%2 == 0){g.setColor(Color.white);}
+                else{g.setColor(Color.black);}
             g.fillOval( array_a.get(i), array_b.get(i), 50, 50);
             }
         }
     }    
     
-    
-
